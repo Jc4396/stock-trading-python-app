@@ -1,0 +1,1 @@
+conda install --yes --file requirements.txt OR pip install -r requirements.txt
