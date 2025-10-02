@@ -1,3 +1,4 @@
+import csv
 import os
 import time
 
@@ -26,4 +27,28 @@ while "next_url" in data:
         tickers.append(ticker)
     time.sleep(30)  # 5 requests per minute
 
-print(len(tickers))
+example_ticker = {
+    "ticker": "ZTAX",
+    "name": "X-Square Municipal Income ETF",
+    "market": "stocks",
+    "locale": "us",
+    "primary_exchange": "ARCX",
+    "type": "ETF",
+    "active": True,
+    "currency_name": "usd",
+    "composite_figi": "BBG01GQV0TJ2",
+    "share_class_figi": "BBG01GQV0VC4",
+    "last_updated_utc": "2025-10-01T06:06:06.417975318Z",
+}
+
+
+# Write tickers to csv with example_ticker schema
+fieldnames = list(example_ticker.keys())
+output_csv = "tickers.csv"
+with open(output_csv, mode="w", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    for t in tickers:
+        row = {key: t.get(key, "") for key in fieldnames}
+        writer.writerow(row)
+print(f"Wrote {len(tickers)} tickers to {output_csv}")
