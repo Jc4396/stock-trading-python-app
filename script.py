@@ -25,7 +25,7 @@ while "next_url" in data:
     print(data)
     for ticker in data["results"]:
         tickers.append(ticker)
-    time.sleep(30)  # 5 requests per minute
+    time.sleep(15)  # 5 requests per minute
 
 example_ticker = {
     "ticker": "ZTAX",
